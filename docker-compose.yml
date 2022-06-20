@@ -1,0 +1,118 @@
+version: "3.7"
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: php:8.0.2-fpm
+    container_name: app
+    restart: unless-stopped
+    tty: true
+    volumes:
+      - ./:/var/www/
+      - ./docker/php.ini:/usr/local/etc/php/conf.d/laravel.ini
+    networks:
+      - app-network
+
+  #Nginx Service
+  webserver:
+    image: nginx:alpine
+    container_name: webserver
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./:/var/www/
+      - ./docker/conf.d/:/etc/nginx/conf.d/
+    networks:
+      - app-network
+
+  #MySQL Service
+  db:
+    image: mysql:8.0
+    container_name: db
+    restart: always
+    tty: true
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_USER: user
+      MYSQL_PASSWORD: user
+      MYSQL_ROOT_PASSWORD: Dis!swyqa33
+      MYSQL_DATABASE: default_schema
+    volumes:
+      - dbdata:/var/lib/mysql/
+    networks:
+      - app-network
+
+  phpmyadmin:
+    depends_on:
+      - db
+    image: phpmyadmin/phpmyadmin
+    container_name: pma
+    environment:
+      PMA_HOST: db
+      PMA_ARBITRARY: 1
+      MYSQL_ROOT_PASSWORD: Dis!swyqa33
+    restart: always
+    ports:
+      - 2022:80
+    networks:
+      - app-network
+
+  mailhog:
+    image: mailhog/mailhog:latest
+    container_name: mailhog
+    ports:
+      - 1025:1025
+      - 8025:8025
+    networks:
+      - app-network
+
+  roundcubemail:
+    image: roundcube/roundcubemail:latest
+    container_name: roundcubemail
+    restart: unless-stopped
+    depends_on:
+      - db
+      - webserver
+    links:
+      - db
+    volumes:
+      - ./docker/config.inc.php:/var/www/config/test.inc.php
+    ports:
+      - 9001:80
+    environment:
+      - ROUNDCUBEMAIL_DB_TYPE=mysql
+      - ROUNDCUBEMAIL_DB_NAME=roundcubedb
+      - ROUNDCUBEMAIL_DB_USER=root
+      - ROUNDCUBEMAIL_DB_HOST=db
+      - ROUNDCUBEMAIL_DB_PASSWORD=root
+      - ROUNDCUBEMAIL_SKIN=elastic
+      - ROUNDCUBEMAIL_DEFAULT_HOST=tls://135.181.87.84
+      - ROUNDCUBEMAIL_SMTP_SERVER=tls://135.181.87.84
+    networks:
+      - app-network
+
+  cron:
+    build:
+      context: ./docker/cron
+      dockerfile: Dockerfile
+    image: supervisord
+    container_name: cron
+    volumes:
+      - ./:/var/www/:z
+    networks:
+      - app-network
+
+
+#Docker Networks
+networks:
+  app-network:
+    driver: bridge
+#Volumes
+volumes:
+  dbdata:
+    driver: local

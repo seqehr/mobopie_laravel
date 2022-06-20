@@ -1,0 +1,1 @@
+ADD docker/config.inc.php /var/www/config/test.inc.php

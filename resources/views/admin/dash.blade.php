@@ -1,0 +1,1 @@
+@extends('layouts.dashlayout') @section('content') test @endsection

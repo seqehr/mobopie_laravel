@@ -45,45 +45,12 @@ class Controller extends BaseController
         }
     }
 
-    public function SendPush(request $req)
+    public function Response($data, $isDone, $message)
     {
-
-        $topic = 'a-topic';
-        $url = 'https://fcm.googleapis.com/fcm/send';
-        // $to = 'cHXoFt86SRyNN4sTVASn8h:APA91bHq7cjDFwBazMinQWoWoNCbsm2dShJkJdMqr4cG8TLLiEcUf9I-cBr2hUzeP9GVhA2dUmMnbwDpjtXAzicXk25RvDpHnK3odIRhwOJqpF4SIBXMatHPbaudNhX89ncD0j8Mx0EB';
-        $to = $req->token;
-        // $fields = array(
-        //     'to' => $to,
-        //     'data' => ["test" => "hi this is nabi"],
-        // );
-
-        $fields = array(
-            'registration_ids' => [$to],
-            "notification" => [
-                "title" => $req->title,
-                "body" => $req->body,
-            ],
-            "data" => [
-                "title" => $req->title,
-                "body" => $req->body,
-            ]
-        );
-        $fields = json_encode($fields);
-
-        $headers = array(
-            'Authorization: key=' . "AAAAVHOCCyk:APA91bEH55k6jCGUmu1qZb0nlo5ZUgyv1xc4uqaiIlQr4BAcJoEFwnSwjKoDZv2Xo9Q-bYfNcJnmcZHHr6WOfd_uOfYcQi39f7VdP7DemL61pymJ3UY_A1EPEdk-FZ4fe2kqr7M4Z92l ",
-            'Content-Type: application/json'
-        );
-
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
-
-        $result = curl_exec($ch);
-        echo $result;
-        curl_close($ch);
+        return response()->json([
+            'isDone' => $isDone,
+            'data' => $data,
+            'message' => $message
+        ]);
     }
 }

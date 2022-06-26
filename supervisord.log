@@ -3499,3 +3499,219 @@
 2022-06-20 10:03:22,292 INFO success: laravel-worker_02 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
 2022-06-20 10:03:22,298 INFO spawned: 'laravel-worker_03' with pid 3252449
 2022-06-20 10:03:23,303 INFO success: laravel-worker_03 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-06-23 14:35:09,060 INFO Set uid to user 0 succeeded
+2022-06-23 14:35:09,069 INFO supervisord started with pid 1
+2022-06-23 14:35:10,072 INFO spawned: 'laravel-worker_00' with pid 9
+2022-06-23 14:35:10,074 INFO spawned: 'laravel-worker_01' with pid 10
+2022-06-23 14:35:10,076 INFO spawned: 'laravel-worker_02' with pid 11
+2022-06-23 14:35:10,078 INFO spawned: 'laravel-worker_03' with pid 12
+2022-06-23 14:35:10,080 INFO spawned: 'laravel-schedule_01' with pid 13
+2022-06-23 14:35:10,082 INFO spawned: 'laravel-schedule_00' with pid 14
+2022-06-23 14:35:10,084 INFO spawned: 'laravel-schedule_03' with pid 15
+2022-06-23 14:35:10,085 INFO spawned: 'laravel-schedule_02' with pid 16
+2022-06-23 14:35:10,335 INFO exited: laravel-worker_00 (exit status 255; not expected)
+2022-06-23 14:35:10,336 INFO exited: laravel-worker_01 (exit status 255; not expected)
+2022-06-23 14:35:10,336 INFO exited: laravel-worker_02 (exit status 255; not expected)
+2022-06-23 14:35:10,336 INFO exited: laravel-worker_03 (exit status 255; not expected)
+2022-06-23 14:35:10,337 INFO exited: laravel-schedule_01 (exit status 255; not expected)
+2022-06-23 14:35:10,337 INFO exited: laravel-schedule_00 (exit status 255; not expected)
+2022-06-23 14:35:10,337 INFO exited: laravel-schedule_03 (exit status 255; not expected)
+2022-06-23 14:35:10,338 INFO exited: laravel-schedule_02 (exit status 255; not expected)
+2022-06-23 14:35:11,342 INFO spawned: 'laravel-worker_00' with pid 17
+2022-06-23 14:35:11,344 INFO spawned: 'laravel-worker_01' with pid 18
+2022-06-23 14:35:11,345 INFO spawned: 'laravel-worker_02' with pid 19
+2022-06-23 14:35:11,347 INFO spawned: 'laravel-worker_03' with pid 20
+2022-06-23 14:35:11,349 INFO spawned: 'laravel-schedule_01' with pid 21
+2022-06-23 14:35:11,351 INFO spawned: 'laravel-schedule_00' with pid 22
+2022-06-23 14:35:11,352 INFO spawned: 'laravel-schedule_03' with pid 23
+2022-06-23 14:35:11,354 INFO spawned: 'laravel-schedule_02' with pid 24
+2022-06-23 14:35:11,365 INFO exited: laravel-worker_00 (exit status 255; not expected)
+2022-06-23 14:35:11,365 INFO exited: laravel-worker_01 (exit status 255; not expected)
+2022-06-23 14:35:11,368 INFO exited: laravel-worker_02 (exit status 255; not expected)
+2022-06-23 14:35:11,371 INFO exited: laravel-schedule_01 (exit status 255; not expected)
+2022-06-23 14:35:11,371 INFO exited: laravel-worker_03 (exit status 255; not expected)
+2022-06-23 14:35:11,377 INFO exited: laravel-schedule_03 (exit status 255; not expected)
+2022-06-23 14:35:11,378 INFO exited: laravel-schedule_00 (exit status 255; not expected)
+2022-06-23 14:35:11,378 INFO exited: laravel-schedule_02 (exit status 255; not expected)
+2022-06-23 14:35:13,382 INFO spawned: 'laravel-worker_00' with pid 25
+2022-06-23 14:35:13,384 INFO spawned: 'laravel-worker_01' with pid 26
+2022-06-23 14:35:13,386 INFO spawned: 'laravel-worker_02' with pid 27
+2022-06-23 14:35:13,388 INFO spawned: 'laravel-worker_03' with pid 28
+2022-06-23 14:35:13,391 INFO spawned: 'laravel-schedule_01' with pid 29
+2022-06-23 14:35:13,393 INFO spawned: 'laravel-schedule_00' with pid 30
+2022-06-23 14:35:13,397 INFO spawned: 'laravel-schedule_03' with pid 31
+2022-06-23 14:35:13,400 INFO spawned: 'laravel-schedule_02' with pid 32
+2022-06-23 14:35:13,409 INFO exited: laravel-worker_00 (exit status 255; not expected)
+2022-06-23 14:35:13,414 INFO exited: laravel-worker_01 (exit status 255; not expected)
+2022-06-23 14:35:13,417 INFO exited: laravel-worker_02 (exit status 255; not expected)
+2022-06-23 14:35:13,419 INFO exited: laravel-worker_03 (exit status 255; not expected)
+2022-06-23 14:35:13,422 INFO exited: laravel-schedule_01 (exit status 255; not expected)
+2022-06-23 14:35:13,423 INFO exited: laravel-schedule_00 (exit status 255; not expected)
+2022-06-23 14:35:13,426 INFO exited: laravel-schedule_03 (exit status 255; not expected)
+2022-06-23 14:35:13,430 INFO exited: laravel-schedule_02 (exit status 255; not expected)
+2022-06-23 14:35:16,435 INFO spawned: 'laravel-worker_00' with pid 33
+2022-06-23 14:35:16,437 INFO spawned: 'laravel-worker_01' with pid 34
+2022-06-23 14:35:16,439 INFO spawned: 'laravel-worker_02' with pid 35
+2022-06-23 14:35:16,440 INFO spawned: 'laravel-worker_03' with pid 36
+2022-06-23 14:35:16,442 INFO spawned: 'laravel-schedule_01' with pid 37
+2022-06-23 14:35:16,444 INFO spawned: 'laravel-schedule_00' with pid 38
+2022-06-23 14:35:16,446 INFO spawned: 'laravel-schedule_03' with pid 39
+2022-06-23 14:35:16,448 INFO spawned: 'laravel-schedule_02' with pid 40
+2022-06-23 14:35:16,459 INFO exited: laravel-worker_00 (exit status 255; not expected)
+2022-06-23 14:35:16,464 INFO gave up: laravel-worker_00 entered FATAL state, too many start retries too quickly
+2022-06-23 14:35:16,466 INFO exited: laravel-worker_03 (exit status 255; not expected)
+2022-06-23 14:35:16,467 INFO exited: laravel-worker_01 (exit status 255; not expected)
+2022-06-23 14:35:16,467 INFO exited: laravel-worker_02 (exit status 255; not expected)
+2022-06-23 14:35:16,470 INFO gave up: laravel-worker_01 entered FATAL state, too many start retries too quickly
+2022-06-23 14:35:16,470 INFO gave up: laravel-worker_02 entered FATAL state, too many start retries too quickly
+2022-06-23 14:35:16,470 INFO gave up: laravel-worker_03 entered FATAL state, too many start retries too quickly
+2022-06-23 14:35:16,472 INFO exited: laravel-schedule_00 (exit status 255; not expected)
+2022-06-23 14:35:16,473 INFO gave up: laravel-schedule_00 entered FATAL state, too many start retries too quickly
+2022-06-23 14:35:16,474 INFO exited: laravel-schedule_01 (exit status 255; not expected)
+2022-06-23 14:35:16,475 INFO gave up: laravel-schedule_01 entered FATAL state, too many start retries too quickly
+2022-06-23 14:35:16,475 INFO exited: laravel-schedule_03 (exit status 255; not expected)
+2022-06-23 14:35:16,476 INFO gave up: laravel-schedule_03 entered FATAL state, too many start retries too quickly
+2022-06-23 14:35:16,476 INFO exited: laravel-schedule_02 (exit status 255; not expected)
+2022-06-23 14:35:17,478 INFO gave up: laravel-schedule_02 entered FATAL state, too many start retries too quickly
+2022-06-23 14:35:36,017 WARN received SIGQUIT indicating exit request
+2022-06-23 14:48:18,915 INFO Set uid to user 0 succeeded
+2022-06-23 14:48:18,920 INFO supervisord started with pid 1
+2022-06-23 14:48:19,923 INFO spawned: 'laravel-worker_00' with pid 10
+2022-06-23 14:48:19,925 INFO spawned: 'laravel-worker_01' with pid 11
+2022-06-23 14:48:19,927 INFO spawned: 'laravel-worker_02' with pid 12
+2022-06-23 14:48:19,928 INFO spawned: 'laravel-worker_03' with pid 13
+2022-06-23 14:48:19,930 INFO spawned: 'laravel-schedule_01' with pid 14
+2022-06-23 14:48:19,934 INFO spawned: 'laravel-schedule_00' with pid 15
+2022-06-23 14:48:19,938 INFO spawned: 'laravel-schedule_03' with pid 16
+2022-06-23 14:48:19,941 INFO spawned: 'laravel-schedule_02' with pid 17
+2022-06-23 14:48:19,961 INFO exited: laravel-worker_00 (exit status 255; not expected)
+2022-06-23 14:48:19,962 INFO exited: laravel-worker_01 (exit status 255; not expected)
+2022-06-23 14:48:19,971 INFO exited: laravel-worker_03 (exit status 255; not expected)
+2022-06-23 14:48:19,973 INFO exited: laravel-worker_02 (exit status 255; not expected)
+2022-06-23 14:48:19,976 INFO exited: laravel-schedule_01 (exit status 255; not expected)
+2022-06-23 14:48:19,977 INFO exited: laravel-schedule_00 (exit status 255; not expected)
+2022-06-23 14:48:19,978 INFO exited: laravel-schedule_03 (exit status 255; not expected)
+2022-06-23 14:48:19,986 INFO exited: laravel-schedule_02 (exit status 255; not expected)
+2022-06-23 14:48:20,989 INFO spawned: 'laravel-worker_00' with pid 18
+2022-06-23 14:48:20,991 INFO spawned: 'laravel-worker_01' with pid 19
+2022-06-23 14:48:20,994 INFO spawned: 'laravel-worker_02' with pid 20
+2022-06-23 14:48:20,995 INFO spawned: 'laravel-worker_03' with pid 21
+2022-06-23 14:48:20,999 INFO spawned: 'laravel-schedule_01' with pid 22
+2022-06-23 14:48:21,001 INFO spawned: 'laravel-schedule_00' with pid 23
+2022-06-23 14:48:21,003 INFO spawned: 'laravel-schedule_03' with pid 24
+2022-06-23 14:48:21,005 INFO spawned: 'laravel-schedule_02' with pid 25
+2022-06-23 14:48:21,017 INFO exited: laravel-worker_00 (exit status 255; not expected)
+2022-06-23 14:48:21,018 INFO exited: laravel-worker_01 (exit status 255; not expected)
+2022-06-23 14:48:21,024 INFO exited: laravel-worker_02 (exit status 255; not expected)
+2022-06-23 14:48:21,026 INFO exited: laravel-worker_03 (exit status 255; not expected)
+2022-06-23 14:48:21,027 INFO exited: laravel-schedule_00 (exit status 255; not expected)
+2022-06-23 14:48:21,028 INFO exited: laravel-schedule_03 (exit status 255; not expected)
+2022-06-23 14:48:21,028 INFO exited: laravel-schedule_01 (exit status 255; not expected)
+2022-06-23 14:48:21,037 INFO exited: laravel-schedule_02 (exit status 255; not expected)
+2022-06-23 14:48:23,042 INFO spawned: 'laravel-worker_00' with pid 26
+2022-06-23 14:48:23,044 INFO spawned: 'laravel-worker_01' with pid 27
+2022-06-23 14:48:23,046 INFO spawned: 'laravel-worker_02' with pid 28
+2022-06-23 14:48:23,049 INFO spawned: 'laravel-worker_03' with pid 29
+2022-06-23 14:48:23,052 INFO spawned: 'laravel-schedule_01' with pid 30
+2022-06-23 14:48:23,054 INFO spawned: 'laravel-schedule_00' with pid 31
+2022-06-23 14:48:23,056 INFO spawned: 'laravel-schedule_03' with pid 32
+2022-06-23 14:48:23,058 INFO spawned: 'laravel-schedule_02' with pid 33
+2022-06-23 14:48:23,071 INFO exited: laravel-worker_00 (exit status 255; not expected)
+2022-06-23 14:48:23,073 INFO exited: laravel-worker_01 (exit status 255; not expected)
+2022-06-23 14:48:23,080 INFO exited: laravel-worker_02 (exit status 255; not expected)
+2022-06-23 14:48:23,084 INFO exited: laravel-worker_03 (exit status 255; not expected)
+2022-06-23 14:48:23,085 INFO exited: laravel-schedule_01 (exit status 255; not expected)
+2022-06-23 14:48:23,085 INFO exited: laravel-schedule_00 (exit status 255; not expected)
+2022-06-23 14:48:23,086 INFO exited: laravel-schedule_03 (exit status 255; not expected)
+2022-06-23 14:48:23,092 INFO exited: laravel-schedule_02 (exit status 255; not expected)
+2022-06-23 14:48:26,098 INFO spawned: 'laravel-worker_00' with pid 34
+2022-06-23 14:48:26,101 INFO spawned: 'laravel-worker_01' with pid 35
+2022-06-23 14:48:26,106 INFO spawned: 'laravel-worker_02' with pid 36
+2022-06-23 14:48:26,108 INFO spawned: 'laravel-worker_03' with pid 37
+2022-06-23 14:48:26,111 INFO spawned: 'laravel-schedule_01' with pid 38
+2022-06-23 14:48:26,115 INFO spawned: 'laravel-schedule_00' with pid 39
+2022-06-23 14:48:26,118 INFO spawned: 'laravel-schedule_03' with pid 40
+2022-06-23 14:48:26,121 INFO spawned: 'laravel-schedule_02' with pid 41
+2022-06-23 14:48:26,129 INFO exited: laravel-worker_00 (exit status 255; not expected)
+2022-06-23 14:48:26,130 INFO exited: laravel-worker_01 (exit status 255; not expected)
+2022-06-23 14:48:26,131 INFO gave up: laravel-worker_00 entered FATAL state, too many start retries too quickly
+2022-06-23 14:48:26,131 INFO gave up: laravel-worker_01 entered FATAL state, too many start retries too quickly
+2022-06-23 14:48:26,134 INFO exited: laravel-worker_02 (exit status 255; not expected)
+2022-06-23 14:48:26,137 INFO gave up: laravel-worker_02 entered FATAL state, too many start retries too quickly
+2022-06-23 14:48:26,139 INFO exited: laravel-worker_03 (exit status 255; not expected)
+2022-06-23 14:48:26,141 INFO gave up: laravel-worker_03 entered FATAL state, too many start retries too quickly
+2022-06-23 14:48:26,143 INFO exited: laravel-schedule_00 (exit status 255; not expected)
+2022-06-23 14:48:26,143 INFO exited: laravel-schedule_01 (exit status 255; not expected)
+2022-06-23 14:48:26,144 INFO gave up: laravel-schedule_01 entered FATAL state, too many start retries too quickly
+2022-06-23 14:48:26,144 INFO gave up: laravel-schedule_00 entered FATAL state, too many start retries too quickly
+2022-06-23 14:48:26,150 INFO exited: laravel-schedule_03 (exit status 255; not expected)
+2022-06-23 14:48:26,150 INFO gave up: laravel-schedule_03 entered FATAL state, too many start retries too quickly
+2022-06-23 14:48:26,152 INFO exited: laravel-schedule_02 (exit status 255; not expected)
+2022-06-23 14:48:27,154 INFO gave up: laravel-schedule_02 entered FATAL state, too many start retries too quickly
+2022-06-25 15:27:10,227 INFO Set uid to user 0 succeeded
+2022-06-25 15:27:10,245 INFO supervisord started with pid 1
+2022-06-25 15:27:11,249 INFO spawned: 'laravel-worker_00' with pid 10
+2022-06-25 15:27:11,252 INFO spawned: 'laravel-worker_01' with pid 11
+2022-06-25 15:27:11,254 INFO spawned: 'laravel-worker_02' with pid 12
+2022-06-25 15:27:11,258 INFO spawned: 'laravel-worker_03' with pid 13
+2022-06-25 15:27:11,260 INFO spawned: 'laravel-schedule_01' with pid 14
+2022-06-25 15:27:11,263 INFO spawned: 'laravel-schedule_00' with pid 15
+2022-06-25 15:27:11,265 INFO spawned: 'laravel-schedule_03' with pid 16
+2022-06-25 15:27:11,267 INFO spawned: 'laravel-schedule_02' with pid 17
+2022-06-25 15:27:12,269 INFO success: laravel-worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-06-25 15:27:12,270 INFO success: laravel-worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-06-25 15:27:12,270 INFO success: laravel-worker_02 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-06-25 15:27:12,270 INFO success: laravel-worker_03 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-06-25 15:27:12,270 INFO success: laravel-schedule_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-06-25 15:27:12,271 INFO success: laravel-schedule_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-06-25 15:27:12,271 INFO success: laravel-schedule_03 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-06-25 15:27:12,272 INFO success: laravel-schedule_02 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-06-25 15:28:30,963 WARN received SIGQUIT indicating exit request
+2022-06-25 15:28:30,964 INFO waiting for laravel-worker_00, laravel-worker_01, laravel-worker_02, laravel-worker_03, laravel-schedule_01, laravel-schedule_00, laravel-schedule_03, laravel-schedule_02 to die
+2022-06-25 15:28:30,972 INFO stopped: laravel-schedule_01 (terminated by SIGTERM)
+2022-06-25 15:28:30,972 INFO stopped: laravel-schedule_00 (terminated by SIGTERM)
+2022-06-25 15:28:30,973 INFO stopped: laravel-schedule_03 (terminated by SIGTERM)
+2022-06-25 15:28:30,974 INFO stopped: laravel-schedule_02 (terminated by SIGTERM)
+2022-06-25 15:28:30,978 INFO stopped: laravel-worker_01 (terminated by SIGTERM)
+2022-06-25 15:28:30,980 INFO stopped: laravel-worker_03 (terminated by SIGTERM)
+2022-06-25 15:28:30,984 INFO stopped: laravel-worker_02 (terminated by SIGTERM)
+2022-06-25 15:28:30,987 INFO reaped unknown pid 439
+2022-06-25 15:28:30,988 INFO reaped unknown pid 438
+2022-06-25 15:28:30,989 INFO stopped: laravel-worker_00 (terminated by SIGTERM)
+2022-06-25 15:28:30,990 INFO reaped unknown pid 446
+2022-06-25 15:28:46,592 INFO Set uid to user 0 succeeded
+2022-06-25 15:28:46,597 INFO supervisord started with pid 1
+2022-06-25 15:28:47,601 INFO spawned: 'laravel-worker_00' with pid 9
+2022-06-25 15:28:47,603 INFO spawned: 'laravel-worker_01' with pid 10
+2022-06-25 15:28:47,607 INFO spawned: 'laravel-worker_02' with pid 11
+2022-06-25 15:28:47,610 INFO spawned: 'laravel-worker_03' with pid 12
+2022-06-25 15:28:47,612 INFO spawned: 'laravel-schedule_01' with pid 13
+2022-06-25 15:28:47,614 INFO spawned: 'laravel-schedule_00' with pid 14
+2022-06-25 15:28:47,616 INFO spawned: 'laravel-schedule_03' with pid 15
+2022-06-25 15:28:47,618 INFO spawned: 'laravel-schedule_02' with pid 16
+2022-06-25 15:28:48,622 INFO success: laravel-worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-06-25 15:28:48,623 INFO success: laravel-worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-06-25 15:28:48,623 INFO success: laravel-worker_02 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-06-25 15:28:48,624 INFO success: laravel-worker_03 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-06-25 15:28:48,624 INFO success: laravel-schedule_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-06-25 15:28:48,625 INFO success: laravel-schedule_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-06-25 15:28:48,625 INFO success: laravel-schedule_03 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-06-25 15:28:48,626 INFO success: laravel-schedule_02 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-06-25 15:34:37,161 INFO Set uid to user 0 succeeded
+2022-06-25 15:34:37,169 INFO supervisord started with pid 1
+2022-06-25 15:34:38,173 INFO spawned: 'laravel-worker_00' with pid 9
+2022-06-25 15:34:38,175 INFO spawned: 'laravel-worker_01' with pid 10
+2022-06-25 15:34:38,176 INFO spawned: 'laravel-worker_02' with pid 11
+2022-06-25 15:34:38,179 INFO spawned: 'laravel-worker_03' with pid 12
+2022-06-25 15:34:38,184 INFO spawned: 'laravel-schedule_01' with pid 13
+2022-06-25 15:34:38,186 INFO spawned: 'laravel-schedule_00' with pid 14
+2022-06-25 15:34:38,189 INFO spawned: 'laravel-schedule_03' with pid 15
+2022-06-25 15:34:38,191 INFO spawned: 'laravel-schedule_02' with pid 16
+2022-06-25 15:34:39,193 INFO success: laravel-worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-06-25 15:34:39,193 INFO success: laravel-worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-06-25 15:34:39,194 INFO success: laravel-worker_02 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-06-25 15:34:39,194 INFO success: laravel-worker_03 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-06-25 15:34:39,195 INFO success: laravel-schedule_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-06-25 15:34:39,195 INFO success: laravel-schedule_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-06-25 15:34:39,195 INFO success: laravel-schedule_03 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-06-25 15:34:39,195 INFO success: laravel-schedule_02 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)

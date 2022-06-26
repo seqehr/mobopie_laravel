@@ -15,7 +15,6 @@ class IntrestedController extends Controller
     public function CreateIntrest(Request $req)
     {
         $tags = json_decode($req->tag, true);
-
         foreach ($tags as $singletag) {
 
             $thetag = IntrestedTags::where('tag', $singletag['name'])->where('cat_id', $singletag['cat'])->first();
@@ -46,19 +45,22 @@ class IntrestedController extends Controller
     }
     public function Userintrests(Request $req)
     {
-        $intrests = IntrestedTags::where('user_id', $req->user()->id)->get()->all();
-        return response()->json([
-            'isDone' => true,
-            'data' => $intrests
-        ]);
+        $intrests = IntrestedUserTags::where('user_id', $req->user()->id)->get()->all();
+        if (!empty($intrests)) {
+            return Controller::Response($intrests, true, '');
+        } else {
+            return Controller::Response('', false, 'empty');
+        }
     }
     public function IntrestCats()
     {
-        $cats = IntrestedCats::all();
-        return response()->json([
-            'isDone' => true,
-            'data' => $cats
-        ]);
+        $cats = IntrestedCats::get()->all();
+
+        if (!empty($cats)) {
+            return Controller::Response($cats, true, '');
+        } else {
+            return Controller::Response('', false, 'empty');
+        }
     }
     public function IntrestTags(request $req)
     {

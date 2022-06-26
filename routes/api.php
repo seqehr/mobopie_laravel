@@ -97,5 +97,10 @@ Route::post('admin/singleuser', [App\Http\Controllers\AdminController::class, 'S
 Route::post('admin/posts', [App\Http\Controllers\AdminController::class, 'Posts'])->middleware('auth:sanctum');
 Route::post('admin/stories', [App\Http\Controllers\AdminController::class, 'Stories'])->middleware('auth:sanctum');
 Route::post('admin/users/disable', [App\Http\Controllers\AdminController::class, 'DisableUser'])->middleware('auth:sanctum');
-
+Route::post('business/cats', [App\Http\Controllers\BusinessController::class, 'BusinessCats'])->middleware('auth:sanctum');
+Route::post('business/addbusiness', [App\Http\Controllers\BusinessController::class, 'AddBusiness'])->middleware('auth:sanctum');
+Route::post('business/addpost', [App\Http\Controllers\BusinessController::class, 'CreatePosts'])->middleware('auth:sanctum');
+Route::post('business/follow', [App\Http\Controllers\BusinessController::class, 'FollowABusiness'])->middleware('auth:sanctum');
+Route::post('business/profile', [App\Http\Controllers\BusinessController::class, 'BusinessProfile'])->middleware('auth:sanctum');
+Route::post('business/updateprofile', [App\Http\Controllers\BusinessController::class, 'UpdateBusinessProfile'])->middleware('auth:sanctum');
 // Reset Data base for delete stories

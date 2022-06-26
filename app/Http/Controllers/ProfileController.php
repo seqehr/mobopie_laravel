@@ -48,7 +48,6 @@ class ProfileController extends Controller
 
             foreach ($req->file('vit') as $image) {
 
-                $fileName = time() . '_' . $image->getClientOriginalName();
                 $checkupload = Storage::disk('sv')->put('vitrin', $image);
                 VitrinPhotos::create([
                     'img' => $checkupload,
@@ -57,48 +56,24 @@ class ProfileController extends Controller
                 ]);
             }
         }
-        if ($req->img and $req->bg) {
-            $images = [$req->img, $req->bg];
-            foreach ($images as $in) {
-                $image_64 = $in;
-                $extension = explode('/', explode(':', substr($image_64, 0, strpos($image_64, ';')))[1])[1];
-                $replace = substr($image_64, 0, strpos($image_64, ',') + 1);
-                $image = str_replace($replace, '', $image_64);
-                $image = str_replace(' ', '+', $image);
-                $imageName = Str::random(10) . '.' . $extension;
-                $base = base64_decode($in);
-                $checkupload = Storage::disk('sv')->put($imageName, base64_decode($image));
 
-                $paths[] = '/sv/' . $imageName;
-            }
+        $changes = [];
+        $changes = $req->all();
+        unset($changes['works']);
+        unset($changes['languages']);
+
+        if (!empty($req->file('img'))) {
+            $img = Storage::disk('sv')->put('profile_img', $req->file('img'));
+            $changes['img'] = $img;
         }
-        if (User::where('id', $req->user()->id)->update([
-            'name' => $req->name ?? "",
-            'img' => $paths[0] ?? "",
-            'bg' => $paths[1] ?? "",
-            'bio' => $req->bio,
-            'gender' => $req->gender,
-            'region' => $req->region,
-            'birthday' => $req->birthday,
-            'fname' => $req->fname,
-            'lname' => $req->lname,
-            'height' => $req->height,
-            'language' => $req->language,
-            'relationship' => $req->relationship,
-            'sex' => $req->sex,
-            'religion' => $req->religion,
-            'personality' => $req->personality,
-            'education' => $req->education,
-            'work' => $req->work
-        ])) {
-            return response()->json([
-                'isDone' => true
-            ]);
-        } else {
-            return response()->json([
-                'isDone' => false
-            ]);
+        if (!empty($req->file('bg'))) {
+            $bg = Storage::disk('sv')->put('profile_bg', $req->file('bg'));
+            $changes['bg'] = $bg;
         }
+
+
+        User::where('id', $req->user()->id)->update($changes);
+        return Controller::Response('', true, 'updated');
     }
     public function UserProfile(Request $req)
     {

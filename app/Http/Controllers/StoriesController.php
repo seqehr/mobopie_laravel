@@ -16,18 +16,24 @@ class StoriesController extends Controller
 {
     public function CreateStory(request $req)
     {
+        if (!empty($req->file('input'))) {
 
-        $fileName = time() . '_' . $req->file('input')->getClientOriginalName();
-        $checkupload = Storage::disk('sv')->put('stories', $req->file('input'));
+            $fileName = time() . '_' . $req->file('input')->getClientOriginalName();
+            $checkupload = Storage::disk('sv')->put('stories', $req->file('input'));
 
-        $db = Stories::create([
-            'user_id' => $req->user()->id,
-            'input' => $checkupload,
-        ]);
-        $isdone = Controller::isDone($db);
-        return response()->json([
-            'isDone' => $isdone,
-        ]);
+            $db = Stories::create([
+                'user_id' => $req->user()->id,
+                'input' => $checkupload,
+            ]);
+            $isdone = Controller::isDone($db);
+            return response()->json([
+                'isDone' => $isdone,
+            ]);
+        } else {
+            return response()->json([
+                'isDone' => false,
+            ]);
+        }
     }
 
     public function UserStories(request $req)

@@ -48,24 +48,20 @@ class AuthController extends Controller
     public function CheckEmail(Request $request)
     {
         $user = User::where('email', $request->email)->get()->first();
-        $checkdb = Controller::CheckDB($user);
-        return response()->json([
-            'isDone' => $checkdb,
-            'data' => [
-                'isRegistered' => $checkdb
-            ]
-        ]);
+        if (empty($user)) {
+            return Controller::Response('', true, 'free');
+        } else {
+            return Controller::Response('', false, 'taken');
+        }
     }
     public function CheckUsername(request $request)
     {
         $user = User::where('name', $request->name)->get()->first();
-        $checkdb = Controller::CheckDB($user);
-        return response()->json([
-            'isDone' => $checkdb,
-            'data' => [
-                'isRegistered' => $checkdb
-            ]
-        ]);
+        if (empty($user)) {
+            return Controller::Response('', true, 'free');
+        } else {
+            return Controller::Response('', false, 'taken');
+        }
     }
     public function SendVEmail(request $request)
     {
@@ -282,6 +278,6 @@ class AuthController extends Controller
 
     public function NotLogin(request $req)
     {
-        return 'Please Login Again';
+        return Controller::Response('', false, "login failed");
     }
 }

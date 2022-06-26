@@ -31,9 +31,10 @@ class SendVerifyEmail implements ShouldQueue
      */
     public function handle()
     {
-        Mail::to($this->data['email'])->send(new \App\Mail\SendVerifcationCode($this->data['details']));
-        if (Mail::failures()) {
-            return 'failed';
-        }
+        // Mail::to($this->data['email'])->send(new \App\Mail\SendVerifcationCode($this->data['details']));
+        // if (Mail::failures()) {
+        //     return 'failed';
+        // }
+
     }
 }

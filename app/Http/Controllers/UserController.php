@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdateLocReq;
+use App\Http\Requests\UserSearchReq;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Followers;
@@ -62,7 +64,7 @@ class UserController extends Controller
         return redirect()->back()->with('mssg', 'Action Successed');
     }
 
-    public function UserSearch(request $req)
+    public function UserSearch(request $req, UserSearchReq $valid)
     {
         $newusers = [];
         $searchTerm = $req->name;
@@ -156,23 +158,19 @@ class UserController extends Controller
         } else {
             $users = [];
         }
-        $isdone = Controller::CheckDB($users);
-        return response()->json([
-            'isDone' => true,
-            'data' => $newusers
-        ]);
+
+        return Controller::Response($newusers, true, '');
     }
-    public function Updateloc(Request $req)
+    public function Updateloc(Request $req, UpdateLocReq $valid)
     {
         $user = User::where('id', $req->user()->id)->update([
-            'lat' => $req->lat,
-            'lon' => $req->lon
+            'lat' => $valid->lat,
+            'lon' => $valid->lon
         ]);
-
-        $isdone = Controller::CheckDB($user);
-        return response()->json([
-            'isDone' => $isdone,
-        ]);
+        if (!$user) {
+            return Controller::Response('', false, 'something went wrong');
+        }
+        return Controller::Response('', true, 'updated');
     }
 
     public function CreateFcm(Request $req)

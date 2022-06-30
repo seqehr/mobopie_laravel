@@ -32,9 +32,9 @@ class BlockUserController extends Controller
     {
 
         $list = BlockUser::where('user_id', $req->user()->id)->with('user')->get()->all();
-        return response()->json([
-            'isDone' => true,
-            'data' => $list
-        ]);
+        if (empty($list)) {
+            return Controller::Response('', false, 'empty');
+        }
+        return Controller::Response($list, true, '');
     }
 }

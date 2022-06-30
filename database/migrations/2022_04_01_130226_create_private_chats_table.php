@@ -17,6 +17,7 @@ class CreatePrivateChatsTable extends Migration
             $table->id();
             $table->string('first_user');
             $table->string('secound_user');
+            $table->string('mode');
             $table->timestamps();
             $table->softDeletes();
         });

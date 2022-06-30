@@ -11,8 +11,5 @@ class PrivateChats extends Model
     use SoftDeletes;
     use HasFactory;
     public $table = 'private_chats';
-    protected $fillable = [
-        'first_user',
-        'secound_user'
-    ];
+    protected $guarded = [];
 }

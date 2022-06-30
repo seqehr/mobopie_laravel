@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateVitrinReq;
+use App\Http\Requests\RegionSearch;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,6 +15,7 @@ use App\Models\UserWorks;
 use App\Models\VitrinPhotos;
 use App\Models\BlockUser;
 use App\Models\PrivateChats;
+use App\Models\Posts;
 
 class ProfileController extends Controller
 {
@@ -84,7 +87,11 @@ class ProfileController extends Controller
             $id = $req->user()->id;
         }
         $data = User::where('id', $id)->get()->makeHidden(['status', 'date', 'level', 'remember_token', 'email_verified_at'])->first()->toArray();
-
+        $followers = Followers::where('following_id', $id)->where('status', true)->with('follower')->count();
+        $totalfollowers = $followers;
+        $following = Followers::where('follower_id', $id)->where('status', 'accepted')->count();
+        $totalfollowing = $following;
+        $totalposts = Posts::where('user_id', $id)->count();
         $followed = Followers::where('following_id', $req->user()->id)->where('follower_id', $data['id'])->get()->toArray();
         if (!empty($followed)) {
             $followed = true;
@@ -121,8 +128,12 @@ class ProfileController extends Controller
             $cid = null;
         }
         $data['chat_id'] = $cid;
-        $data['img'] = env('DEFAULT_URL')  . $data['img'];
-        $data['bg'] = env('DEFAULT_URL') . $data['bg'];
+        $data['img'] = env('DEFAULT_URL')  . '/sv/' . $data['img'];
+        $data['bg'] = env('DEFAULT_URL')  . '/sv/' . $data['bg'];
+        $data['totalfollowers'] = $totalfollowers;
+        $data['totalfollowing'] = $totalfollowing;
+        $data['totalposts'] = $totalposts;
+
         return response()->json(
             [
                 'isDone' => true,
@@ -131,7 +142,7 @@ class ProfileController extends Controller
         );
     }
 
-    public function RegionSearch(request $request)
+    public function RegionSearch()
     {
 
         // $param = 'q=' . $request->all()['query'];
@@ -149,23 +160,22 @@ class ProfileController extends Controller
         foreach ($data as $data) {
             $what[] = $data->name->common;
         }
-
-        return response()->json([
-            'isDone' => true,
-            'data' => $what
-        ]);
+        if (empty($what)) {
+            return Controller::Response('', false, 'try again');
+        }
+        return Controller::Response($what, true, '');
     }
 
-    public function createVitrinPhotos(request $req)
+    public function createVitrinPhotos(request $req, CreateVitrinReq $valid)
     {
 
-        if ($req->file('img')) {
-            if ($req->default == 'true') {
+        if ($valid->file('img')) {
+            if ($valid->default == 'true') {
                 $default = true;
             } else {
                 $default = false;
             }
-            foreach ($req->file('img') as $image) {
+            foreach ($valid->file('img') as $image) {
 
                 $VitrinPhotos = VitrinPhotos::where('id', $req->id)->get()->first();
                 if (!empty($VitrinPhotos)) {
@@ -185,19 +195,17 @@ class ProfileController extends Controller
                     ]);
                 }
             }
-        }
-        return response()->json([
-            'isDone' => true,
 
-        ]);
+            return Controller::Response('', true, 'added');
+        } else {
+            return Controller::Response('', false, 'something wrong');
+        }
     }
     public function UserVitrin(request $req)
     {
         $photos = VitrinPhotos::where('user_id', $req->user()->id)->take(5)->get()->toArray();
-        return response()->json([
-            'isDone' => true,
-            'data' => $photos
-        ]);
+
+        return Controller::Response($photos, true, '');
     }
 
     public function CreateLanguage(request $req)

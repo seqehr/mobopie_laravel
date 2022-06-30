@@ -28,6 +28,8 @@ class DatabaseSeeder extends Seeder
         // ]);
         $this->call([
             BusinessCatsSeeder::class,
+            PostsSeeder::class,
+            StoriesSeeder::class,
         ]);
         // $data = [
         //     'food',

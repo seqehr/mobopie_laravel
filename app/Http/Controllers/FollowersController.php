@@ -76,10 +76,10 @@ class FollowersController extends Controller
             $data[] = $follower['follower'];
         }
         // $isDone = Controller::CheckDB($followers);
-        return response()->json([
-            'isDone' => true,
-            'data' => $data
-        ]);
+        if (empty($data)) {
+            return Controller::Response('', false, 'empty');
+        }
+        return Controller::Response($data, true, '');
     }
 
     public function UserFollowers(request $req)
@@ -98,10 +98,10 @@ class FollowersController extends Controller
         }
 
         // $isDone = Controller::CheckDB($followers);
-        return response()->json([
-            'isDone' => true,
-            'data' => $data
-        ]);
+        if (empty($data)) {
+            return Controller::Response('', false, 'empty');
+        }
+        return Controller::Response($data, true, '');
     }
     public function UnfollowUsers(request $req)
     {
@@ -116,12 +116,10 @@ class FollowersController extends Controller
     {
 
         $followers = Followers::where('following_id', $req->user()->id)->where('status', false)->with('follower')->get()->all();
-
-        $isDone = Controller::CheckDB($followers);
-        return response()->json([
-            'isDone' => $isDone,
-            'data' => $followers
-        ]);
+        if (count($followers) < 1) {
+            return Controller::Response('', false, 'empty');
+        }
+        return Controller::Response($followers, true, '');
     }
 
     public function FollowChangeStatus(request $req)

@@ -50,13 +50,14 @@ class SendPrivateMessageJob implements ShouldQueue
             [
                 'secound_user', '=', $recevier_id
             ],
-        ])->get()->first();
+        ])->where('mode', $data['mode'])->get()->first();
         if (!empty($chat)) {
             $chat_id = $chat->id;
         } else {
             $newchat = PrivateChats::create([
                 'first_user' => $data['sender_id'],
-                'secound_user' => $recevier_id
+                'secound_user' => $recevier_id,
+                'mode' => $data['mode'],
             ]);
             $chat_id = $newchat['id'];
         }

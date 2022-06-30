@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateIntrestReq;
+use App\Http\Requests\IntrestsTagsReq;
+use App\Http\Requests\LikeIntrestReq;
 use App\Models\IntrestedCats;
 use App\Models\IntrestedTags;
 use App\Models\IntrestedUserTags;
@@ -12,9 +15,9 @@ use App\Models\PrivateChats;
 
 class IntrestedController extends Controller
 {
-    public function CreateIntrest(Request $req)
+    public function CreateIntrest(Request $req, CreateIntrestReq $valid)
     {
-        $tags = json_decode($req->tag, true);
+        $tags = json_decode($valid->tag, true);
         foreach ($tags as $singletag) {
 
             $thetag = IntrestedTags::where('tag', $singletag['name'])->where('cat_id', $singletag['cat'])->first();
@@ -46,41 +49,35 @@ class IntrestedController extends Controller
     public function Userintrests(Request $req)
     {
         $intrests = IntrestedUserTags::where('user_id', $req->user()->id)->get()->all();
-        if (!empty($intrests)) {
-            return Controller::Response($intrests, true, '');
-        } else {
-            return Controller::Response('', false, 'empty');
-        }
+
+        return Controller::Response($intrests, true, '');
     }
     public function IntrestCats()
     {
         $cats = IntrestedCats::get()->all();
 
-        if (!empty($cats)) {
-            return Controller::Response($cats, true, '');
-        } else {
-            return Controller::Response('', false, 'empty');
-        }
+
+        return Controller::Response($cats, true, '');
     }
-    public function IntrestTags(request $req)
+    public function IntrestTags(request $req, IntrestsTagsReq $valid)
     {
-        $tags = IntrestedTags::where('cat_id', $req->id)->get();
-        return response()->json([
-            'isDone' => true,
-            'data' =>  $tags
-        ]);
+        $tags = IntrestedTags::where('cat_id', $valid->id)->get();
+
+
+
+        return Controller::Response($tags, true, '');
     }
-    public function CreateLike(request $req)
+    public function CreateLike(request $req, LikeIntrestReq $valid)
     {
         $likepeople = LikePeople::where([
             ['first_user', '=', $req->user()->id],
             [
-                'secound_user', '=', $req->user_id
+                'secound_user', '=', $valid->user_id
             ],
         ])->orwhere([
             ['first_user', '=', $req->user()->id],
             [
-                'secound_user', '=', $req->user_id
+                'secound_user', '=', $valid->user_id
             ],
         ])->get()->first();
         if (!empty($likepeople)) {
@@ -94,18 +91,18 @@ class IntrestedController extends Controller
                     'slike' => true,
                 ]);
             }
-        } else {
+            return Controller::Response('', true, 'updated');
+        } elseif (empty($likepeople)) {
             $likepeople = LikePeople::create([
                 'first_user' => $req->user()->id,
-                'secound_user' =>  $req->user_id,
+                'secound_user' => $valid->user_id,
                 'flike' => true,
                 'slike' => false,
             ]);
+            return Controller::Response('', true, 'created');
+        } else {
+            return Controller::Response('', false, 'some error');
         }
-        return response()->json([
-            'isDone' => true,
-
-        ]);
     }
 
     public function LikedPeople(request $req)
@@ -140,9 +137,7 @@ class IntrestedController extends Controller
             $newuser['img'] = env('DEFAULT_URL')  . $usr['img'];
             $newusers[] = $newuser;
         }
-        return response()->json([
-            'isDone' => true,
-            'data' => $newusers
-        ]);
+
+        return Controller::Response($newusers, true, '');
     }
 }

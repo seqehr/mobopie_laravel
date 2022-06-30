@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ExploreReq;
 use App\Models\FollowingPosts;
 use App\Models\PostComments;
 use Illuminate\Http\Request;
 use App\Models\Posts;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
-
 use Illuminate\Support\Str;
 use App\Models\PostTags;
 use App\Models\TagPeople;
@@ -17,6 +17,7 @@ use DB;
 use App\Models\PostLikes;
 use App\Models\Followers;
 use App\Models\SavedPosts;
+use PhpParser\Node\Expr;
 
 class PostController extends Controller
 {
@@ -179,21 +180,13 @@ class PostController extends Controller
             $newpost['comments'] = $this->getCommentSingle($newcomments, $data);
 
             $newpost['name'] = $usr['name'];
-            $newpost['img'] = env('DEFAULT_URL')  . $usr['img'];
+            $newpost['img'] = env('DEFAULT_URL') . '/sv/' . $usr['img'];
 
 
             $output[] = $newpost;
         }
 
-
-        return response()->json(
-            [
-                'isDone' => true,
-                'data' =>
-                $output
-
-            ]
-        );
+        return Controller::Response($output, true, '');
     }
 
     public function SinglePost(request $request, $id)
@@ -254,17 +247,7 @@ class PostController extends Controller
     public function FollowingPosts(request $req)
     {
 
-        // $posts = FollowingPosts::where('following_id', $req->user()->id)->with('posts.likes', 'myposts.likes')->get()->toArray();
-        // dd($selfposts);
-        // $posts = Followers::where('following_id', $req->user()->id)->join->on('posts', 'followers.follower_id', '=', 'posts.user_id')->join('posts', 'followers.following_id', '=', 'posts.user_id')->get()->toArray();
-        // $posts = User::where('id', $req->user()->id)->join('followers', 'users.id', '=', 'followers.following_id')->join(
-        //     'posts',
-        //     function ($join) {
-        //         $join->orOn('followers.following_id', '=', 'posts.user_id')
-        //             ->oron('followers.follower_id', '=', 'posts.user_id');
-        //     }
-        // )->get()->all();
-        // dd($posts);
+
         $followers = FollowingPosts::where('following_id', $req->user()->id)->orderby('created_at', 'desc')->get()->toArray();
         $uid = (string) $req->user()->id;
         $newfollowers = [$uid];
@@ -272,19 +255,13 @@ class PostController extends Controller
         foreach ($followers as $follower) {
             $newfollowers[] = $follower['follower_id'];
         }
-        // dd($newfollowers);
-        // dd($newfollowers);
+
         $posts =  Posts::whereIn('user_id', $newfollowers)->with('likes')->get()->toArray();
-        // $posts = Followers::where('following_id', $req->user()->id)->join('posts', 'followers.follower_id', '=', 'posts.user_id')->select('posts.*')->get()->toArray();
-        // $selfposts = Posts::where('user_id', $req->user()->id)->get()->toArray();
-        // $allposts = array_merge($posts, $selfposts);
-        // dd($allposts);
+
         $output = [];
         $data = [];
         $newcomments = [];
         foreach ($posts as $post) {
-            // dd($posts);
-
             $inputs =   json_decode($post['inputs']);
             foreach ($inputs as  $input) {
                 $type = substr($input, strpos($input, ".") + 1);
@@ -332,7 +309,9 @@ class PostController extends Controller
             $usr = User::find($post['user_id']);
             $newpost['isLike'] = $isLike;
             $newpost['totalcomments'] = PostComments::where('post_id', $post['id'])->whereNull('parent_id')->with('user:id,name,img')->count();
-
+            if ($newpost['totalcomments'] == null) {
+                $newpost['totalcomments'] = 0;
+            }
             $newpost['likes']  = $post['likes'];
             // $newpost['comments'] = [];
             $newpost['isFollowing']  = true;
@@ -349,6 +328,9 @@ class PostController extends Controller
 
             $output[] = $newpost;
         }
+        if (empty($output)) {
+            return Controller::Response('', false, 'empty');
+        }
         $isDone = Controller::CheckDB($posts);
         return response()->json([
             'isDone' => true,
@@ -363,8 +345,6 @@ class PostController extends Controller
 
         $posts = User::find($req->id)->with('posts.likes')->get()->toArray();
 
-        // $selfposts = Posts::where('id', $req->user()->id)->with('posts')->get()->toArray();
-        // dd($selfposts);
         $output = [];
         $newcomments = [];
         foreach ($posts as $post) {
@@ -376,12 +356,7 @@ class PostController extends Controller
                     $inpt[] = $inp;
                 }
                 $post['inputs'] = $inpt;
-                // $comments = PostComments::where('post_id', $post['id'])->whereNull('parent_id')->with('user:id,name,img')->get()->toArray();
-                // foreach ($comments as $child) {
 
-                //     $child['user']['img'] = env('DEFAULT_URL')  . $child['user']['img'];
-                //     $newcomments[] = $child;
-                // }
                 $totallikes = count($post['likes']);
                 $post['totallikes'] = $totallikes;
                 $newpost = $post;
@@ -396,8 +371,6 @@ class PostController extends Controller
                 $newpost['comments'] = null;
                 $newpost['name'] = $usr['name'];
                 $newpost['img'] = 'http://app.seeuland.com' . $usr['img'];
-
-                // $newpost['comments'] = $this->getCommentSingle($newcomments, $output);
                 $output[] = $newpost;
             }
         }
@@ -408,10 +381,10 @@ class PostController extends Controller
         ]);
     }
 
-    public function Explore(Request $req)
+    public function Explore(Request $req,  ExploreReq $valid)
     {
-        $skip = $req->number - 5;
-        $posts = Posts::inRandomOrder()->with('likes')->skip($skip)->take($req->number)->get()->toArray();
+        $skip = $valid->number - 5;
+        $posts = Posts::inRandomOrder()->with('likes')->skip($skip)->take($valid->number)->get()->toArray();
         $output = [];
         $data = [];
         foreach ($posts as $post) {
@@ -457,9 +430,10 @@ class PostController extends Controller
             $usr = User::find($post['user_id']);
             $newpost['isLike'] = $isLike;
             $newpost['totalcomments'] = PostComments::where('post_id', $post['id'])->whereNull('parent_id')->with('user:id,name,img')->count();
-
+            if ($newpost['totalcomments'] == null) {
+                $newpost['totalcomments'] = 0;
+            }
             $newpost['likes']  = $post['likes'];
-            // $newpost['comments'] = [];
             $newpost['isFollowing']  = true;
 
             $newpost['name'] = $usr['name'];
@@ -468,10 +442,8 @@ class PostController extends Controller
 
             $output[] = $newpost;
         }
-        return response()->json([
-            'isDone' => true,
-            'data' => $output
-        ]);
+
+        return Controller::Response($output, true, '');
     }
 
     public function DeletePost(request $req)
@@ -566,7 +538,9 @@ class PostController extends Controller
             $usr = User::find($post['user_id']);
             $newpost['isLike'] = $isLike;
             $newpost['totalcomments'] = PostComments::where('post_id', $post['id'])->whereNull('parent_id')->with('user:id,name,img')->count();
-
+            if ($newpost['totalcomments'] == null) {
+                $newpost['totalcomments'] = 0;
+            }
             $newpost['likes']  = $post['likes'];
             // $newpost['comments'] = [];
             $newpost['isFollowing']  = true;
